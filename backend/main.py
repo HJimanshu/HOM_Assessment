@@ -50,7 +50,7 @@ def login(user:User):
     return {"Message":"User Login Successfully","Token":token}
 
 @app.post("/create_tasks")
-def create_task(task:TaskInput,username:str=Depends(get_user)):
+def create_task(task:TaskInput,username: str = Depends(get_user)):
     task_id=add_task(username,task.task)
     return {"Message":"Task Added","Id":task_id}
 
@@ -63,6 +63,7 @@ def view_tasks(username:str=Depends(get_user)):
 @app.delete("/tasks_delete/{task_id}")
 def delete_task(task_id:int,username:str=Depends(get_user)):
     delete_tasks(username,task_id)
+    print("debug this function",delete_tasks)
     return {"Message":"Task Deleted Successfully"}
 
 @app.post("/logout")
@@ -72,6 +73,6 @@ def logout(token:str = Header(default=None)):
     invalidate_token(token)
     return {"Message":"Logout Successfully"}
 
-if __name__=="__main__":
-    import uvicorn
-    uvicorn.run(app,host="0.0.0.0", port= 8800)
+# if __name__=="__main__":
+#     import uvicorn
+#     uvicorn.run(app,host="0.0.0.0", port= 8800)

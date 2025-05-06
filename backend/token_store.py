@@ -14,8 +14,7 @@ def generate_token(username:str):
 
 #verify the token after getting username from token.
 def get_username_from_token(token:str):
-    if token in token_list:
-        return None
+    
     return token_store.get(token)
 
 def invalidate_token(token:str):
